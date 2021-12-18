@@ -1,5 +1,5 @@
-import { ButtonProps } from "./Button";
-import React from "react";
+import React from 'react';
+import { ButtonProps } from './Button';
 export interface ActionSelectorItemAction extends ButtonProps {
     id: string;
 }

@@ -1,5 +1,5 @@
-import { ReactChild } from "react";
-declare type ButtonColor = "primary" | "secondary";
+import { ReactChild } from 'react';
+declare type ButtonColor = 'primary' | 'secondary';
 export interface ButtonProps {
     title?: string;
     titleComponent?: ReactChild | ReactChild[];

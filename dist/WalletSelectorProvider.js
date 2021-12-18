@@ -32,10 +32,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.useWalletSelector = void 0;
-const react_1 = __importStar(require("react"));
 const hooks_1 = require("@metaphor-xyz/hooks");
-const web3modal_1 = __importDefault(require("web3modal"));
 const web3_provider_1 = __importDefault(require("@walletconnect/web3-provider"));
+const react_1 = __importStar(require("react"));
+const web3modal_1 = __importDefault(require("web3modal"));
 const WalletSelectorContext = (0, react_1.createContext)(null);
 let web3Modal = null;
 function WalletSelectorProvider({ infuraId, children }) {
@@ -59,7 +59,7 @@ function WalletSelectorProvider({ infuraId, children }) {
             connectProvider(provider);
         }
     }), []);
-    return (react_1.default.createElement(WalletSelectorContext.Provider, { value: { connect, connected } }, children));
+    return react_1.default.createElement(WalletSelectorContext.Provider, { value: { connect, connected } }, children);
 }
 exports.default = WalletSelectorProvider;
 function useWalletSelector() {

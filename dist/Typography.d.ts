@@ -1,6 +1,6 @@
-import { ReactChild } from "react";
-import { TextProps } from "react-native";
-export declare type TypographyType = "h1" | "h2" | "h3" | "body-bold" | "body" | "button" | "info" | "small-button";
+import { ReactChild } from 'react';
+import { TextProps } from 'react-native';
+export declare type TypographyType = 'h1' | 'h2' | 'h3' | 'body-bold' | 'body' | 'button' | 'info' | 'small-button';
 declare type Props = {
     children?: ReactChild | ReactChild[];
     style?: any;

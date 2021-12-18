@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 export interface SideNavItemProps {
 }
 export declare function SideNavItem({}: SideNavItemProps): JSX.Element;

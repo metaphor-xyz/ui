@@ -4,9 +4,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SideNavItem = void 0;
-const theme_1 = require("./theme");
 const react_1 = __importDefault(require("react"));
 const react_native_1 = require("react-native");
+const theme_1 = require("./theme");
 function SideNavItem({}) {
     const styles = useStyles();
     return react_1.default.createElement(react_native_1.View, { style: styles.itemContainer });
@@ -19,7 +19,7 @@ function SideNav({ items, headerComponent }) {
         react_1.default.createElement(react_native_1.View, { style: styles.content }, items)));
 }
 exports.default = SideNav;
-const useStyles = (0, theme_1.createStyles)((_theme) => ({
+const useStyles = (0, theme_1.createStyles)(_theme => ({
     container: {},
     header: {},
     content: {},

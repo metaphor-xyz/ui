@@ -693,9 +693,9 @@
   resolved "https://registry.yarnpkg.com/@metamask/safe-event-emitter/-/safe-event-emitter-2.0.0.tgz#af577b477c683fad17c619a78208cede06f9605c"
   integrity sha512-/kSXhY692qiV1MXu6EeOZvg5nECLclxNXcKCxJ3cXQgYuRymRHpdx/t7JXfsK+JLjwA1e1c1/SBrlQYpusC29Q==
 
-"@metaphor-xyz/hooks@metaphor-xyz/hooks#master":
+"@metaphor-xyz/hooks@https://github.com/metaphor-xyz/hooks/tarball/master":
   version "0.0.1"
-  resolved "git+ssh://git@github.com/metaphor-xyz/hooks.git#e0b8b9d8652bd72f550371c2138b16cc3a92f35e"
+  resolved "https://github.com/metaphor-xyz/hooks/tarball/master#6706f7a145d3e452d228bac1e08ccbeed579f99e"
   dependencies:
     ethers "^5.5.2"
 

@@ -31,14 +31,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const Typography_1 = __importDefault(require("./Typography"));
-const theme_1 = require("./theme");
 const react_1 = __importStar(require("react"));
 const react_2 = require("react");
 const react_native_1 = require("react-native");
 const react_native_paper_1 = require("react-native-paper");
+const Typography_1 = __importDefault(require("./Typography"));
+const theme_1 = require("./theme");
 function isPromise(obj) {
-    return !!obj && typeof obj === "object" && "then" in obj;
+    return !!obj && typeof obj === 'object' && 'then' in obj;
 }
 function Button({ preTextComponent, title, titleComponent, onPress, disabled, size, fullWidth, color, loading, }) {
     const styles = useStyles();
@@ -65,13 +65,11 @@ function Button({ preTextComponent, title, titleComponent, onPress, disabled, si
         }
     }), [onPress]);
     const isLoading = loading || asyncLoading;
-    const colorClass = color
-        ? `color-${color}`
-        : "color-primary";
+    const colorClass = color ? `color-${color}` : 'color-primary';
     if (isLoading) {
         return (react_1.default.createElement(react_native_1.TouchableOpacity, { style: [
                 styles.container,
-                size === "sm" && styles.containerSM,
+                size === 'sm' && styles.containerSM,
                 styles.loadingButton,
                 styles.disabled,
                 fullWidth && styles.fullWidth,
@@ -80,36 +78,36 @@ function Button({ preTextComponent, title, titleComponent, onPress, disabled, si
             react_1.default.createElement(react_native_paper_1.ActivityIndicator, { color: "#fff", size: "small" })));
     }
     return (react_1.default.createElement("button", { style: {
-            border: "none",
-            cursor: disabled ? "default" : "pointer",
-            background: "none",
-            width: fullWidth ? "100%" : undefined,
-            maxWidth: "330px",
+            border: 'none',
+            cursor: disabled ? 'default' : 'pointer',
+            background: 'none',
+            width: fullWidth ? '100%' : undefined,
+            maxWidth: '330px',
             padding: 0,
         }, onMouseEnter: onMouseEnter, onMouseLeave: onMouseLeave, disabled: disabled },
         react_1.default.createElement(react_native_1.TouchableOpacity, { style: [
                 styles.container,
-                size === "sm" && styles.containerSM,
+                size === 'sm' && styles.containerSM,
                 mouseEntered && styles.hover,
                 disabled && styles.disabled,
                 fullWidth && styles.fullWidth,
                 styles[colorClass],
             ], onPress: press, disabled: disabled, activeOpacity: 0.8 },
             preTextComponent,
-            titleComponent ? (react_1.default.createElement(react_1.default.Fragment, null, titleComponent)) : (react_1.default.createElement(Typography_1.default, { type: size === "sm" ? "small-button" : "button" }, title)))));
+            titleComponent ? (react_1.default.createElement(react_1.default.Fragment, null, titleComponent)) : (react_1.default.createElement(Typography_1.default, { type: size === 'sm' ? 'small-button' : 'button' }, title)))));
 }
 exports.default = Button;
-const useStyles = (0, theme_1.createStyles)((theme) => ({
+const useStyles = (0, theme_1.createStyles)(theme => ({
     container: {
         padding: 10,
         paddingRight: 20,
         paddingLeft: 20,
         maxWidth: 330,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
         borderRadius: 2,
-        flexDirection: "row",
+        flexDirection: 'row',
     },
     containerSM: {
         height: 34,
@@ -121,11 +119,11 @@ const useStyles = (0, theme_1.createStyles)((theme) => ({
         opacity: 0.85,
     },
     fullWidth: {
-        width: "100%",
+        width: '100%',
     },
     text: {
-        color: "#fff",
-        fontWeight: "700",
+        color: '#fff',
+        fontWeight: '700',
         fontSize: 24,
     },
     textSM: {
@@ -134,10 +132,10 @@ const useStyles = (0, theme_1.createStyles)((theme) => ({
     loadingButton: {
         minWidth: 100,
     },
-    "color-primary": {
+    'color-primary': {
         backgroundColor: theme.colors.primary,
     },
-    "color-secondary": {
+    'color-secondary': {
         backgroundColor: theme.colors.accent,
     },
 }));

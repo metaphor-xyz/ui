@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 export interface StepperItemProps {
     id: string;
     label: string;
@@ -9,4 +9,4 @@ export interface StepperProps {
     activeItem: string;
     headerComponent?: React.ReactNode | null;
 }
-export default function Stepper({ children, activeItem, headerComponent, }: StepperProps): JSX.Element;
+export default function Stepper({ children, activeItem, headerComponent }: StepperProps): JSX.Element;
