@@ -17,3 +17,5 @@ export { default as NameWithIcon } from './NameWithIcon';
 export { default as ActionSelector, ActionSelectorItem } from './ActionSelector';
 
 export { default as BaseContainer } from './BaseContainer';
+
+export { default as TopNav } from './TopNav';
