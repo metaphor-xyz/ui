@@ -6,7 +6,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import Typography from './Typography';
 import { createStyles } from './theme';
 
-type ButtonColor = 'primary' | 'secondary';
+type ButtonColor = 'primary' | 'secondary' | 'unfilled-with-border';
 
 export interface ButtonProps {
   title?: string;
@@ -17,7 +17,9 @@ export interface ButtonProps {
   size?: string;
   color?: ButtonColor;
   fullWidth?: boolean;
+  rounded?: boolean;
   preTextComponent?: ReactChild | ReactChild[];
+  postTextComponent?: ReactChild | ReactChild[];
 }
 
 function isPromise<T>(obj: unknown): obj is Promise<T> {
@@ -26,12 +28,14 @@ function isPromise<T>(obj: unknown): obj is Promise<T> {
 
 export default function Button({
   preTextComponent,
+  postTextComponent,
   title,
   titleComponent,
   onPress,
   disabled,
   size,
   fullWidth,
+  rounded,
   color,
   loading,
 }: ButtonProps) {
@@ -73,6 +77,7 @@ export default function Button({
           styles.loadingButton,
           styles.disabled,
           fullWidth && styles.fullWidth,
+          rounded && styles.rounded,
           styles[colorClass],
         ]}
         disabled
@@ -89,6 +94,7 @@ export default function Button({
         cursor: disabled ? 'default' : 'pointer',
         background: 'none',
         width: fullWidth ? '100%' : undefined,
+        borderRadius: rounded ? '100px' : undefined,
         maxWidth: '330px',
         padding: 0,
       }}
@@ -103,6 +109,7 @@ export default function Button({
           mouseEntered && styles.hover,
           disabled && styles.disabled,
           fullWidth && styles.fullWidth,
+          rounded && styles.rounded,
           styles[colorClass],
         ]}
         onPress={press}
@@ -115,6 +122,7 @@ export default function Button({
         ) : (
           <Typography type={size === 'sm' ? 'small-button' : 'button'}>{title}</Typography>
         )}
+        {postTextComponent}
       </TouchableOpacity>
     </button>
   );
@@ -144,6 +152,9 @@ const useStyles = createStyles(theme => ({
   fullWidth: {
     width: '100%',
   },
+  rounded: {
+    borderRadius: 100,
+  },
   text: {
     color: '#fff',
     fontWeight: '700',
@@ -160,5 +171,9 @@ const useStyles = createStyles(theme => ({
   },
   'color-secondary': {
     backgroundColor: theme.colors.accent,
+  },
+  'color-unfilled-with-border': {
+    backgroundColor: theme.colors.background,
+    border: theme.colors.onSurface,
   },
 }));
