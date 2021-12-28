@@ -7,5 +7,7 @@ export { default as Typography } from './Typography';
 export { default as ThemeProvider } from './ThemeProvider';
 export { default as NameWithIcon } from './NameWithIcon';
 export { default as ActionSelector, ActionSelectorItem } from './ActionSelector';
+export { default as ActionCardGroup, ActionCard } from './ActionCardGroup';
 export { default as BaseContainer } from './BaseContainer';
 export { default as TopNav } from './TopNav';
+export { default as Pill } from './Pill';
