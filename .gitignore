@@ -63,8 +63,7 @@ buck-out/
 web-build/
 data/
 .runtimeconfig.json
-# TEMPORARY
-# dist
+dist
 
 package-lock.json
 yarn.lock
