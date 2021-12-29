@@ -1,11 +1,10 @@
-import React, { ReactChild, useCallback, useState } from 'react';
-import { Image, TouchableOpacity, View } from 'react-native';
-import { ActivityIndicator } from 'react-native-paper';
+import React, { ReactChild, useCallback, useEffect, useRef, useState } from 'react';
+import { ActivityIndicator, Animated, Image, TouchableOpacity, View } from 'react-native';
 
 import Typography from './Typography';
 import { createStyles } from './theme';
 
-export interface ActionCardProps {
+export interface InfoCardProps {
   icon: string;
   title?: string;
   titleComponent?: ReactChild | ReactChild[];
@@ -21,15 +20,18 @@ function isPromise<T>(obj: unknown): obj is Promise<T> {
   return !!obj && typeof obj === 'object' && 'then' in obj;
 }
 
-export function ActionCard(_props: ActionCardProps) {
+export function InfoCard(_props: InfoCardProps) {
   return null;
 }
 
-interface ActionCardWrapperProps {
-  actionCard: React.ReactElement<ActionCardProps>;
+// eslint-disable-next-line
+type AnimationConfig = any;
+
+interface InfoCardWrapperProps {
+  infoCard: React.ReactElement<InfoCardProps>;
 }
 
-function ActionCardWrapper({ actionCard }: ActionCardWrapperProps) {
+function InfoCardWrapper({ infoCard }: InfoCardWrapperProps) {
   const {
     icon,
     title,
@@ -40,9 +42,10 @@ function ActionCardWrapper({ actionCard }: ActionCardWrapperProps) {
     onPress,
     disabled,
     loading,
-  } = actionCard.props;
+  } = infoCard.props;
 
   const styles = useStyles();
+  const scalingAnim = useRef(new Animated.Value(1)).current;
   const [mouseEntered, setMouseEntered] = useState(false);
   const [asyncLoading, setAsyncLoading] = useState(false);
 
@@ -52,6 +55,26 @@ function ActionCardWrapper({ actionCard }: ActionCardWrapperProps) {
   const onMouseLeave = useCallback(() => {
     setMouseEntered(false);
   }, []);
+
+  useEffect(() => {
+    if (!disabled) {
+      if (mouseEntered) {
+        // Scale component when mouse enters
+        Animated.timing(scalingAnim, {
+          toValue: 1.5,
+          duration: 200,
+          useNativeDriver: true,
+        } as AnimationConfig).start();
+      } else {
+        // Reset component to 100% scale when mouse leaves
+        Animated.timing(scalingAnim, {
+          toValue: 1,
+          duration: 200,
+          useNativeDriver: true,
+        } as AnimationConfig).start();
+      }
+    }
+  }, [disabled, scalingAnim, mouseEntered]);
 
   const press = useCallback(async () => {
     if (onPress) {
@@ -77,24 +100,9 @@ function ActionCardWrapper({ actionCard }: ActionCardWrapperProps) {
     );
   }
 
-  return (
-    <button
-      style={{
-        border: 'none',
-        cursor: disabled ? 'default' : 'pointer',
-        background: 'none',
-        padding: 0,
-      }}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-      disabled={disabled}
-    >
-      <TouchableOpacity
-        style={[styles.itemContainer, mouseEntered && styles.hover, disabled && styles.disabled]}
-        onPress={press}
-        disabled={disabled}
-        activeOpacity={0.8}
-      >
+  const innerComponent = (
+    <Animated.View style={[styles.itemContainer, disabled && styles.disabled, { transform: [{ scale: scalingAnim }] }]}>
+      <TouchableOpacity onPress={press} disabled={!onPress || disabled} activeOpacity={0.8}>
         <View style={styles.centerAlign}>
           <View style={styles.iconContainer}>
             <Image style={{ height: '100%' }} source={{ uri: icon }} />
@@ -112,12 +120,36 @@ function ActionCardWrapper({ actionCard }: ActionCardWrapperProps) {
         </View>
         {postTextComponent}
       </TouchableOpacity>
-    </button>
+    </Animated.View>
+  );
+
+  // If info card is a button, wrap in button tag
+  if (onPress) {
+    <button
+      style={{
+        border: 'none',
+        cursor: disabled ? 'default' : 'pointer',
+        background: 'none',
+        padding: 0,
+      }}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      disabled={disabled}
+    >
+      {innerComponent}
+    </button>;
+  }
+
+  // If info card is not a button, wrap in a div tag
+  return (
+    <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+      {innerComponent}
+    </div>
   );
 }
 
 export interface ActionCardGroupProps {
-  children: React.ReactElement<ActionCardProps> | React.ReactElement<ActionCardProps>[];
+  children: React.ReactElement<InfoCardProps> | React.ReactElement<InfoCardProps>[];
 }
 
 export default function ActionCardGroup({ children }: ActionCardGroupProps) {
@@ -128,7 +160,7 @@ export default function ActionCardGroup({ children }: ActionCardGroupProps) {
   return (
     <View style={styles.container}>
       {items.map(child => (
-        <ActionCardWrapper key={child.props.title} actionCard={child} />
+        <InfoCardWrapper key={child.props.title} infoCard={child} />
       ))}
     </View>
   );
@@ -141,11 +173,12 @@ const useStyles = createStyles(theme => ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    textAlign: 'center',
   },
 
   iconContainer: {
     marginBottom: 18,
-    height: 28,
+    height: 18,
     width: 28,
   },
   descriptionText: {
@@ -154,15 +187,16 @@ const useStyles = createStyles(theme => ({
   },
 
   itemContainer: {
-    height: 265,
+    height: 290,
     width: 218,
-    padding: 36,
+    paddingTop: 36,
+    paddingBottom: 36,
     paddingRight: 18,
     paddingLeft: 18,
     margin: 12,
     borderColor: theme.colors.onSurface,
     borderWidth: 1,
-    borderRadius: 2,
+    borderRadius: 25,
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',

@@ -23,3 +23,5 @@ export { default as BaseContainer } from './BaseContainer';
 export { default as TopNav } from './TopNav';
 
 export { default as Pill } from './Pill';
+
+export { default as InfoCardGroup, InfoCard } from './InfoCardGroup';
