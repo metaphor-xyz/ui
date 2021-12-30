@@ -100,27 +100,54 @@ function InfoCardWrapper({ infoCard }: InfoCardWrapperProps) {
     );
   }
 
+  const opacity = scalingAnim.interpolate({
+    inputRange: [1, 1.5],
+    outputRange: [0, 1],
+  });
+
   const innerComponent = (
-    <Animated.View style={[styles.itemContainer, disabled && styles.disabled, { transform: [{ scale: scalingAnim }] }]}>
-      <TouchableOpacity onPress={press} disabled={!onPress || disabled} activeOpacity={0.8}>
-        <View style={styles.centerAlign}>
-          <View style={styles.iconContainer}>
-            <Image style={{ height: '100%' }} source={{ uri: icon }} />
+    <>
+      <Animated.View
+        style={[
+          styles.itemContainer,
+          {
+            position: 'absolute',
+            transform: [{ scale: scalingAnim }],
+            opacity,
+            // @ts-ignore
+            background: 'linear-gradient(180deg, #FAFAF9 0%, rgba(250, 250, 249, 0) 100%)',
+          },
+        ]}
+      />
+      <Animated.View
+        style={[
+          styles.itemContainer,
+          disabled && styles.disabled,
+          {
+            transform: [{ scale: scalingAnim }],
+          },
+        ]}
+      >
+        <TouchableOpacity onPress={press} disabled={!onPress || disabled} activeOpacity={0.8}>
+          <View style={styles.centerAlign}>
+            <View style={[styles.iconContainer, { backgroundColor: 'none' }]}>
+              <Image style={{ height: '100%' }} source={{ uri: icon }} />
+            </View>
+
+            {titleComponent ? <>{titleComponent}</> : <Typography type="body-bold">{title}</Typography>}
+
+            {descriptionComponent ? (
+              <>{descriptionComponent}</>
+            ) : (
+              <Typography type="info" style={styles.descriptionText}>
+                {description}
+              </Typography>
+            )}
           </View>
-
-          {titleComponent ? <>{titleComponent}</> : <Typography type="body-bold">{title}</Typography>}
-
-          {descriptionComponent ? (
-            <>{descriptionComponent}</>
-          ) : (
-            <Typography type="info" style={styles.descriptionText}>
-              {description}
-            </Typography>
-          )}
-        </View>
-        {postTextComponent}
-      </TouchableOpacity>
-    </Animated.View>
+          {postTextComponent}
+        </TouchableOpacity>
+      </Animated.View>
+    </>
   );
 
   // If info card is a button, wrap in button tag

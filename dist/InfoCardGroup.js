@@ -94,14 +94,35 @@ function InfoCardWrapper({ infoCard }) {
         return (react_1.default.createElement(react_native_1.TouchableOpacity, { style: [styles.itemContainer, styles.disabled], disabled: true },
             react_1.default.createElement(react_native_1.ActivityIndicator, { color: "#fff", size: "small" })));
     }
-    const innerComponent = (react_1.default.createElement(react_native_1.Animated.View, { style: [styles.itemContainer, disabled && styles.disabled, { transform: [{ scale: scalingAnim }] }] },
-        react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: press, disabled: !onPress || disabled, activeOpacity: 0.8 },
-            react_1.default.createElement(react_native_1.View, { style: styles.centerAlign },
-                react_1.default.createElement(react_native_1.View, { style: styles.iconContainer },
-                    react_1.default.createElement(react_native_1.Image, { style: { height: '100%' }, source: { uri: icon } })),
-                titleComponent ? react_1.default.createElement(react_1.default.Fragment, null, titleComponent) : react_1.default.createElement(Typography_1.default, { type: "body-bold" }, title),
-                descriptionComponent ? (react_1.default.createElement(react_1.default.Fragment, null, descriptionComponent)) : (react_1.default.createElement(Typography_1.default, { type: "info", style: styles.descriptionText }, description))),
-            postTextComponent)));
+    const opacity = scalingAnim.interpolate({
+        inputRange: [1, 1.5],
+        outputRange: [0, 1],
+    });
+    const innerComponent = (react_1.default.createElement(react_1.default.Fragment, null,
+        react_1.default.createElement(react_native_1.Animated.View, { style: [
+                styles.itemContainer,
+                {
+                    position: 'absolute',
+                    transform: [{ scale: scalingAnim }],
+                    opacity,
+                    // @ts-ignore
+                    background: 'linear-gradient(180deg, #FAFAF9 0%, rgba(250, 250, 249, 0) 100%)',
+                },
+            ] }),
+        react_1.default.createElement(react_native_1.Animated.View, { style: [
+                styles.itemContainer,
+                disabled && styles.disabled,
+                {
+                    transform: [{ scale: scalingAnim }],
+                },
+            ] },
+            react_1.default.createElement(react_native_1.TouchableOpacity, { onPress: press, disabled: !onPress || disabled, activeOpacity: 0.8 },
+                react_1.default.createElement(react_native_1.View, { style: styles.centerAlign },
+                    react_1.default.createElement(react_native_1.View, { style: [styles.iconContainer, { backgroundColor: 'none' }] },
+                        react_1.default.createElement(react_native_1.Image, { style: { height: '100%' }, source: { uri: icon } })),
+                    titleComponent ? react_1.default.createElement(react_1.default.Fragment, null, titleComponent) : react_1.default.createElement(Typography_1.default, { type: "body-bold" }, title),
+                    descriptionComponent ? (react_1.default.createElement(react_1.default.Fragment, null, descriptionComponent)) : (react_1.default.createElement(Typography_1.default, { type: "info", style: styles.descriptionText }, description))),
+                postTextComponent))));
     // If info card is a button, wrap in button tag
     if (onPress) {
         react_1.default.createElement("button", { style: {
