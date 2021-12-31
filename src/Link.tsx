@@ -6,8 +6,6 @@ import { ActivityIndicator } from 'react-native-paper';
 import Typography from './Typography';
 import { createStyles } from './theme';
 
-type ButtonColor = 'primary' | 'secondary';
-
 export interface ButtonProps {
   text?: string;
   url?: string;
