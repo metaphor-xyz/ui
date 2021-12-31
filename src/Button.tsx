@@ -174,6 +174,6 @@ const useStyles = createStyles(theme => ({
   },
   'color-unfilled-with-border': {
     backgroundColor: theme.colors.background,
-    border: theme.colors.onSurface,
+    border: `2px solid ${theme.colors.onSurface}`,
   },
 }));
