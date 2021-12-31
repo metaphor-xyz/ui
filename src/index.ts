@@ -4,6 +4,8 @@ export { default as Button } from './Button';
 
 export { default as ThreeColumn } from './ThreeColumn';
 
+export { default as InfoColumnWithLink } from './InfoColumnWithLink';
+
 export { default as SideNav } from './SideNav';
 
 export { default as Stepper, StepperItem } from './Stepper';
