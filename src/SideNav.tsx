@@ -3,9 +3,7 @@ import { View } from 'react-native';
 
 import { createStyles } from './theme';
 
-export interface SideNavItemProps {}
-
-export function SideNavItem({}: SideNavItemProps) {
+export function SideNavItem() {
   const styles = useStyles();
 
   return <View style={styles.itemContainer}></View>;

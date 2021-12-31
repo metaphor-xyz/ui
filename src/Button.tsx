@@ -21,7 +21,7 @@ export interface ButtonProps {
 }
 
 function isPromise<T>(obj: unknown): obj is Promise<T> {
-  return !!obj && typeof obj === 'object' && 'then' in obj;
+  return !!obj && typeof obj === 'object' && 'then' in obj!;
 }
 
 export default function Button({
