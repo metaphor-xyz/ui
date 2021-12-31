@@ -69,7 +69,7 @@ export default function Link({ text, url, onPress, disabled, loading }: ButtonPr
   );
 }
 
-const useStyles = createStyles(theme => ({
+const useStyles = createStyles(_theme => ({
   container: {
     // cursor: "pointer",
   },
