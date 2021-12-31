@@ -19,7 +19,7 @@ export default function InfoAccordion({ title, description }: InfoAccordionProps
         style={styles.container}
         titleStyle={styles.titleContainer}
         title={
-          <Typography style={styles.title} type="button">
+          <Typography style={styles.title} type="small-button">
             {title}
           </Typography>
         }

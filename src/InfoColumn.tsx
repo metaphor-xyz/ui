@@ -9,13 +9,13 @@ import { createStyles } from './theme';
 export interface InfoColumnProps {
   icon?: string;
   description?: string;
-  videoUrl?: string;
+  videoUri?: string;
   linkText?: string;
-  linkUrl?: string;
+  linkUri?: string;
   accordianTips?: InfoAccordionProps[];
 }
 
-export default function InfoColumn({ icon, description, videoUrl, linkText, linkUrl, accordianTips }: InfoColumnProps) {
+export default function InfoColumn({ icon, description, videoUri, linkText, linkUri, accordianTips }: InfoColumnProps) {
   const styles = useStyles();
 
   return (
@@ -30,10 +30,9 @@ export default function InfoColumn({ icon, description, videoUrl, linkText, link
         {description}
       </Typography>
 
-      {linkText && linkUrl && (
+      {linkText && linkUri && (
         <View style={styles.linkContainer}>
-          {' '}
-          <Link url={linkUrl} text={linkText} />{' '}
+          <Link url={linkUri} text={linkText} />
         </View>
       )}
 
@@ -45,10 +44,10 @@ export default function InfoColumn({ icon, description, videoUrl, linkText, link
         </>
       )}
 
-      {videoUrl && (
+      {videoUri && (
         <View style={styles.videoContainer}>
           {/* TODO: replace with video, not image */}
-          <Image style={{ height: '100%' }} source={{ uri: videoUrl }} />
+          <Image style={{ height: '100%' }} source={{ uri: videoUri }} />
         </View>
       )}
     </View>
