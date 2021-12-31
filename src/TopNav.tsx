@@ -61,7 +61,8 @@ const useStyles = createStyles(theme => ({
     height: 61,
     borderBottomColor: theme.colors.onSurface,
     borderBottomWidth: 1,
-    padding: 11,
+    paddingRight: 11,
+    paddingLeft: 11,
     flexDirection: 'row',
   },
   brandContainer: {
@@ -78,6 +79,6 @@ const useStyles = createStyles(theme => ({
     marginRight: 16,
   },
   infoContainer: {
-    alignSelf: 'flex-end',
+    justifyContent: 'center',
   },
 }));
