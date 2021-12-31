@@ -18,7 +18,7 @@ export interface ActionCardProps {
 }
 
 function isPromise<T>(obj: unknown): obj is Promise<T> {
-  return !!obj && typeof obj === 'object' && 'then' in obj;
+  return !!obj && typeof obj === 'object' && 'then' in obj!;
 }
 
 export function ActionCard(_props: ActionCardProps) {
