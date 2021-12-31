@@ -31,14 +31,14 @@ export default function WalletSelectorProvider({ infuraId, children }: React.Pro
         },
       },
     });
-  }, []);
+  }, [infuraId]);
 
   const connect = useCallback(async () => {
     if (web3Modal) {
       const provider = await web3Modal.connect();
       connectProvider(provider);
     }
-  }, []);
+  }, [connectProvider]);
 
   return <WalletSelectorContext.Provider value={{ connect, connected }}>{children}</WalletSelectorContext.Provider>;
 }
