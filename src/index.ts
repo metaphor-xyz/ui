@@ -4,7 +4,7 @@ export { default as Button } from './Button';
 
 export { default as ThreeColumn } from './ThreeColumn';
 
-export { default as InfoColumnWithLink } from './InfoColumnWithLink';
+export { default as InfoColumn } from './InfoColumn';
 
 export { default as SideNav } from './SideNav';
 
@@ -25,6 +25,8 @@ export { default as BaseContainer } from './BaseContainer';
 export { default as TopNav } from './TopNav';
 
 export { default as Pill } from './Pill';
+
+export { default as InfoAccordion } from './InfoAccordion';
 
 export { default as InfoCardGroup, InfoCard } from './InfoCardGroup';
 

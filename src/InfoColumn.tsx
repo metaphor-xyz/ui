@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, View } from 'react-native';
 
+import InfoAccordion, { InfoAccordionProps } from './InfoAccordion';
 import Link from './Link';
 import Typography from './Typography';
 import { createStyles } from './theme';
@@ -11,9 +12,10 @@ export interface InfoColumnProps {
   videoUrl?: string;
   linkText?: string;
   linkUrl?: string;
+  accordianTips?: InfoAccordionProps[];
 }
 
-export default function InfoColumnWithLink({ icon, description, videoUrl, linkText, linkUrl }: InfoColumnProps) {
+export default function InfoColumn({ icon, description, videoUrl, linkText, linkUrl, accordianTips }: InfoColumnProps) {
   const styles = useStyles();
 
   return (
@@ -28,7 +30,20 @@ export default function InfoColumnWithLink({ icon, description, videoUrl, linkTe
         {description}
       </Typography>
 
-      {linkText && linkUrl && <Link url={linkUrl} text={linkText} />}
+      {linkText && linkUrl && (
+        <View style={styles.linkContainer}>
+          {' '}
+          <Link url={linkUrl} text={linkText} />{' '}
+        </View>
+      )}
+
+      {accordianTips && accordianTips.length > 0 && (
+        <>
+          {accordianTips.map(accordianTip => (
+            <InfoAccordion title={accordianTip.title} description={accordianTip.description} />
+          ))}
+        </>
+      )}
 
       {videoUrl && (
         <View style={styles.videoContainer}>
@@ -49,7 +64,9 @@ const useStyles = createStyles(theme => ({
     alignItems: 'center',
     textAlign: 'center',
   },
-
+  linkContainer: {
+    marginBottom: 8,
+  },
   iconContainer: {
     marginBottom: 18,
     height: 48,
@@ -60,7 +77,8 @@ const useStyles = createStyles(theme => ({
     color: theme.colors.placeholder,
   },
   videoContainer: {
-    marginTop: 18,
+    marginTop: 8,
+    marginBottom: 18,
     height: 168,
     width: 300,
   },
