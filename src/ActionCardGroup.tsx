@@ -1,12 +1,12 @@
 import React, { ReactChild, useCallback, useState } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
 import Typography from './Typography';
 import { createStyles } from './theme';
 
 export interface ActionCardProps {
-  iconComponent: ReactChild | ReactChild[];
+  icon: string;
   title?: string;
   titleComponent?: ReactChild | ReactChild[];
   description?: string;
@@ -31,7 +31,7 @@ interface ActionCardWrapperProps {
 
 function ActionCardWrapper({ actionCard }: ActionCardWrapperProps) {
   const {
-    iconComponent,
+    icon,
     title,
     titleComponent,
     description,
@@ -96,7 +96,9 @@ function ActionCardWrapper({ actionCard }: ActionCardWrapperProps) {
         activeOpacity={0.8}
       >
         <View style={styles.centerAlign}>
-          <View style={styles.iconContainer}>{iconComponent}</View>
+          <View style={styles.iconContainer}>
+            <Image style={{ height: '100%' }} source={{ uri: icon }} />
+          </View>
 
           {titleComponent ? <>{titleComponent}</> : <Typography type="body-bold">{title}</Typography>}
 
@@ -135,6 +137,7 @@ export default function ActionCardGroup({ children }: ActionCardGroupProps) {
 const useStyles = createStyles(theme => ({
   container: {
     display: 'flex',
+    flexWrap: 'wrap',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -142,8 +145,11 @@ const useStyles = createStyles(theme => ({
 
   iconContainer: {
     marginBottom: 18,
+    height: 28,
+    width: 28,
   },
   descriptionText: {
+    marginTop: 4,
     color: theme.colors.placeholder,
   },
 
@@ -151,8 +157,9 @@ const useStyles = createStyles(theme => ({
     height: 265,
     width: 218,
     padding: 36,
-    marginRight: 12,
-    marginLeft: 12,
+    paddingRight: 18,
+    paddingLeft: 18,
+    margin: 12,
     borderColor: theme.colors.onSurface,
     borderWidth: 1,
     borderRadius: 2,
