@@ -1,8 +1,8 @@
 /// <reference types="react" />
 interface ProfileComponentProps {
     name: string;
-    icon: string;
+    address: string;
     onClick?: () => void;
 }
-export default function ProfileComponent({ name, icon, onClick }: ProfileComponentProps): JSX.Element;
+export default function ProfileComponent({ name, address, onClick }: ProfileComponentProps): JSX.Element;
 export {};

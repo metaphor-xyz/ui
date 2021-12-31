@@ -1,16 +1,17 @@
+import Davatar from '@davatar/react';
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View } from 'react-native';
 
 import Button from './Button';
 import { createStyles } from './theme';
 
 interface ProfileComponentProps {
   name: string;
-  icon: string;
+  address: string;
   onClick?: () => void;
 }
 
-export default function ProfileComponent({ name, icon, onClick }: ProfileComponentProps) {
+export default function ProfileComponent({ name, address, onClick }: ProfileComponentProps) {
   const styles = useStyles();
   return (
     <Button
@@ -19,18 +20,16 @@ export default function ProfileComponent({ name, icon, onClick }: ProfileCompone
       onPress={onClick}
       title={name}
       postTextComponent={
-        <View style={styles.itemIcon}>
-          <Image style={{ height: '100%' }} source={{ uri: icon }} />
+        <View style={styles.davatarContainer}>
+          <Davatar size={28} address={address || '0x00000000000000000000000'} />
         </View>
       }
     />
   );
 }
 
-const useStyles = createStyles(theme => ({
-  itemIcon: {
-    width: 24,
-    height: 24,
+const useStyles = createStyles(_theme => ({
+  davatarContainer: {
     marginLeft: 14,
   },
 }));
