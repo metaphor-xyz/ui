@@ -6,7 +6,7 @@ import { ActivityIndicator } from 'react-native-paper';
 import Typography from './Typography';
 import { createStyles } from './theme';
 
-type ButtonColor = 'primary' | 'secondary' | 'unfilled-with-border';
+type ButtonColor = 'primary' | 'secondary' | 'unfilled';
 
 export interface ButtonProps {
   title?: string;
@@ -172,7 +172,7 @@ const useStyles = createStyles(theme => ({
   'color-secondary': {
     backgroundColor: theme.colors.accent,
   },
-  'color-unfilled-with-border': {
+  'color-unfilled': {
     backgroundColor: theme.colors.background,
     border: `2px solid ${theme.colors.onSurface}`,
   },

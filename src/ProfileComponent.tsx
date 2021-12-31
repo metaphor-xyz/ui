@@ -15,7 +15,7 @@ export default function ProfileComponent({ name, address, onClick }: ProfileComp
   const styles = useStyles();
   return (
     <Button
-      color="unfilled-with-border"
+      color="unfilled"
       rounded
       onPress={onClick}
       title={name}
