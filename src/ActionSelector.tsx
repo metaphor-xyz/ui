@@ -22,15 +22,23 @@ export function ActionSelectorItem(_props: ActionSelectorItemProps) {
 
 interface ActionSelectorItemWrapperProps {
   action: React.ReactElement<ActionSelectorItemProps>;
+  borderRadiusTop?: boolean;
+  borderRadiusBottom?: boolean;
 }
 
-function ActionSelectorItemWrapper({ action }: ActionSelectorItemWrapperProps) {
+function ActionSelectorItemWrapper({ action, borderRadiusTop, borderRadiusBottom }: ActionSelectorItemWrapperProps) {
   const styles = useStyles();
 
   const props = action.props;
 
   return (
-    <View style={styles.itemContainer}>
+    <View
+      style={[
+        styles.itemContainer,
+        borderRadiusTop && styles.borderRadiusTop,
+        borderRadiusBottom && styles.borderRadiusBottom,
+      ]}
+    >
       <View style={styles.itemInfo}>
         {props.icon && (
           <View style={styles.itemIcon}>
@@ -62,15 +70,29 @@ export default function ActionSelector({ children }: ActionSelectorProps) {
 
   return (
     <View style={styles.container}>
-      {items.map(c => (
-        <ActionSelectorItemWrapper key={c.props.name} action={c} />
+      {items.map((c, i) => (
+        <ActionSelectorItemWrapper
+          key={c.props.name}
+          action={c}
+          borderRadiusTop={i === 0}
+          borderRadiusBottom={i === items.length - 1}
+        />
       ))}
     </View>
   );
 }
 
 const useStyles = createStyles(theme => ({
-  container: {},
+  container: { width: '100%' },
+  borderRadiusTop: {
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    borderTopWidth: 1,
+  },
+  borderRadiusBottom: {
+    borderBottomLeftRadius: 8,
+    borderBottomRightRadius: 8,
+  },
   itemContainer: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -78,7 +100,8 @@ const useStyles = createStyles(theme => ({
     padding: 15,
     borderColor: theme.colors.onSurface,
     borderWidth: 1,
-    borderRadius: 2,
+    borderRadius: 0,
+    borderTopWidth: 0,
   },
   itemInfo: {
     flexDirection: 'row',

@@ -14,7 +14,7 @@ export default function NameWithIcon({ name, icon }: NameWithIconProps) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.logo}>
+      <View style={styles.icon}>
         <Image style={{ height: '100%' }} source={{ uri: icon }} />
       </View>
       <Typography type="info" style={styles.name}>
@@ -29,7 +29,7 @@ const useStyles = createStyles(_theme => ({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  logo: {
+  icon: {
     height: 30,
     width: 30,
   },

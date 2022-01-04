@@ -21,7 +21,7 @@ export default function ProfileComponent({ name, address, onClick }: ProfileComp
       title={name}
       postTextComponent={
         <View style={styles.davatarContainer}>
-          <Davatar size={28} address={address || '0x00000000000000000000000'} />
+          <Davatar size={28} address={address || '0x0000000000000000000000000000000000000000'} />
         </View>
       }
     />

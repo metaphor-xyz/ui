@@ -39,7 +39,7 @@ export default function InfoColumn({ icon, description, videoUri, linkText, link
       {accordianTips && accordianTips.length > 0 && (
         <>
           {accordianTips.map(accordianTip => (
-            <InfoAccordion title={accordianTip.title} description={accordianTip.description} />
+            <InfoAccordion key={accordianTip.title} title={accordianTip.title} description={accordianTip.description} />
           ))}
         </>
       )}
