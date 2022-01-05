@@ -12,7 +12,9 @@ export { default as InfoColumn } from './InfoColumn';
 
 export { default as SideNav } from './SideNav';
 
-export { default as Stepper, StepperItem } from './Stepper';
+export { default as SimpleVerticalStepper, SimpleVerticalStepperItem } from './SimpleVerticalStepper';
+
+export { default as OutlineStepper, OutlineStepperItem } from './OutlineStepper';
 
 export { default as Breadcrumbs, BreadcrumbsItem } from './Breadcrumbs';
 
@@ -41,3 +43,5 @@ export { default as InfoAccordion } from './InfoAccordion';
 export { default as InfoCardGroup, InfoCard } from './InfoCardGroup';
 
 export { default as ProfileComponent } from './ProfileComponent';
+
+export { default as PaperContainer } from './PaperContainer';
