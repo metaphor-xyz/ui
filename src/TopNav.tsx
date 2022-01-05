@@ -1,7 +1,8 @@
 import React, { useCallback } from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, Image } from 'react-native';
 
 import Typography from './Typography';
+import metaphorLogo from './assets/metaphorLogo.png';
 import { createStyles } from './theme';
 
 export interface TopNavItem {
@@ -20,7 +21,9 @@ function TopNavItemView({ item, onClick }: TopNavItemProps) {
 
   return (
     <TouchableOpacity onPress={onPress} activeOpacity={0.8} style={styles.item}>
-      <Typography type="small-button">{item.label}</Typography>
+      <Typography type="small-button" style={styles.itemLabel}>
+        {item.label}
+      </Typography>
     </TouchableOpacity>
   );
 }
@@ -29,9 +32,10 @@ export interface TopNavProps {
   items: TopNavItem[];
   onClick?: (_id: string) => void;
   infoComponent?: React.ReactChild;
+  customLogoUri?: string;
 }
 
-export default function TopNav({ items, onClick, infoComponent }: TopNavProps) {
+export default function TopNav({ items, onClick, infoComponent, customLogoUri }: TopNavProps) {
   const styles = useStyles();
 
   const clickItem = useCallback(
@@ -45,7 +49,9 @@ export default function TopNav({ items, onClick, infoComponent }: TopNavProps) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.brandContainer}></View>
+      <View style={styles.brandContainer}>
+        <Image style={{ height: '100%' }} source={{ uri: customLogoUri || metaphorLogo }} />
+      </View>
       <View style={styles.itemContainer}>
         {items.map(i => (
           <TopNavItemView key={i.id} item={i} onClick={clickItem} />
@@ -61,12 +67,15 @@ const useStyles = createStyles(theme => ({
     height: 61,
     borderBottomColor: theme.colors.onSurface,
     borderBottomWidth: 1,
-    paddingRight: 11,
-    paddingLeft: 11,
+    paddingRight: 60,
+    paddingLeft: 60,
     flexDirection: 'row',
+    alignItems: 'center',
   },
   brandContainer: {
-    width: 100,
+    width: 34,
+    height: 18,
+    marginRight: 36,
   },
   itemContainer: {
     flex: 1,
@@ -77,6 +86,9 @@ const useStyles = createStyles(theme => ({
   },
   item: {
     marginRight: 16,
+  },
+  itemLabel: {
+    color: theme.colors.placeholder,
   },
   infoContainer: {
     justifyContent: 'center',
