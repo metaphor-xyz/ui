@@ -4,12 +4,12 @@ import { View } from 'react-native';
 import Typography from './Typography';
 import { createStyles } from './theme';
 
-interface StepperItemViewProps {
-  component: React.ReactElement<StepperItemProps>;
+interface SimpleVerticalStepperItemViewProps {
+  component: React.ReactElement<SimpleVerticalStepperItemProps>;
   active: boolean;
 }
 
-function StepperItemView({ component, active }: StepperItemViewProps) {
+function SimpleVerticalStepperItemView({ component, active }: SimpleVerticalStepperItemViewProps) {
   const styles = useStyles();
 
   return (
@@ -19,22 +19,22 @@ function StepperItemView({ component, active }: StepperItemViewProps) {
   );
 }
 
-export interface StepperItemProps {
+export interface SimpleVerticalStepperItemProps {
   id: string;
   label: string;
 }
 
-export function StepperItem(_props: StepperItemProps) {
+export function SimpleVerticalStepperItem(_props: SimpleVerticalStepperItemProps) {
   return null;
 }
 
-export interface StepperProps {
-  children: React.ReactElement<StepperItemProps> | React.ReactElement<StepperItemProps>[];
+export interface SimpleVerticalStepperProps {
+  children: React.ReactElement<SimpleVerticalStepperItemProps> | React.ReactElement<SimpleVerticalStepperItemProps>[];
   activeItem: string;
   headerComponent?: React.ReactNode | null;
 }
 
-export default function Stepper({ children, activeItem, headerComponent }: StepperProps) {
+export default function SimpleVerticalStepper({ children, activeItem, headerComponent }: SimpleVerticalStepperProps) {
   const styles = useStyles();
 
   const items = Array.isArray(children) ? children : [children];
@@ -44,7 +44,7 @@ export default function Stepper({ children, activeItem, headerComponent }: Stepp
       {headerComponent && <View style={styles.header}>{headerComponent}</View>}
       <View style={styles.content}>
         {items.map(c => (
-          <StepperItemView key={c.props.id} component={c} active={c.props.id === activeItem} />
+          <SimpleVerticalStepperItemView key={c.props.id} component={c} active={c.props.id === activeItem} />
         ))}
       </View>
     </View>
