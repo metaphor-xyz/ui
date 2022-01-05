@@ -1,9 +1,9 @@
-// import discordIcon from "./assets/discordIcon.png";
 import React, { useState } from 'react';
 import { useCallback } from 'react';
 import { Image, TouchableOpacity } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
+import discordIcon from './assets/discordIcon.png';
 import { createStyles } from './theme';
 
 export interface DiscordButtonProps {
@@ -11,14 +11,13 @@ export interface DiscordButtonProps {
   disabled?: boolean;
   loading?: boolean;
   size?: string;
-  imageSrc?: string;
 }
 
 function isPromise<T>(obj: unknown): obj is Promise<T> {
   return !!obj && typeof obj === 'object' && 'then' in obj!;
 }
 
-export default function DiscordButton({ onPress, disabled, size, loading, imageSrc }: DiscordButtonProps) {
+export default function DiscordButton({ onPress, disabled, size, loading }: DiscordButtonProps) {
   const styles = useStyles();
   const [mouseEntered, setMouseEntered] = useState(false);
   const [asyncLoading, setAsyncLoading] = useState(false);
@@ -81,7 +80,7 @@ export default function DiscordButton({ onPress, disabled, size, loading, imageS
         disabled={disabled}
         activeOpacity={0.8}
       >
-        <Image style={{ height: '100%' }} source={{ uri: imageSrc }} />
+        <Image style={{ height: '100%' }} source={{ uri: discordIcon }} />
       </TouchableOpacity>
     </button>
   );
