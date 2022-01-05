@@ -90,7 +90,7 @@ function ExpandableActionSelectorItemWrapper({
                           justifyContent: 'center',
                         }}
                       >
-                        <DiscordButton imageSrc={ac.customButtonType} onPress={ac.onPress} />
+                        <DiscordButton onPress={ac.onPress} />
                       </View>
                     ) : (
                       <Button {...ac} />
