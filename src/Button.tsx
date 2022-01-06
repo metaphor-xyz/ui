@@ -3,10 +3,10 @@ import { useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 
-import Typography from './Typography';
+import Typography, { TypographyType } from './Typography';
 import { createStyles } from './theme';
 
-type ButtonColor = 'primary' | 'secondary' | 'unfilled';
+export type ButtonColor = 'primary' | 'secondary' | 'unfilled';
 
 export interface ButtonProps {
   title?: string;
@@ -14,7 +14,7 @@ export interface ButtonProps {
   onPress?: (() => void) | (() => Promise<void>);
   disabled?: boolean;
   loading?: boolean;
-  size?: string;
+  size?: 'sm' | 'md' | 'lg';
   color?: ButtonColor;
   fullWidth?: boolean;
   rounded?: boolean;
@@ -33,7 +33,7 @@ export default function Button({
   titleComponent,
   onPress,
   disabled,
-  size,
+  size = 'md',
   fullWidth,
   rounded,
   color,
@@ -68,12 +68,21 @@ export default function Button({
 
   const colorClass: keyof typeof styles = color ? `color-${color}` : 'color-primary';
 
+  const containerClass: keyof typeof styles = `container-${size}`;
+  let textType: TypographyType = 'button';
+
+  if (size === 'sm') {
+    textType = 'small-button';
+  } else if (size === 'lg') {
+    textType = 'body-bold';
+  }
+
   if (isLoading) {
     return (
       <TouchableOpacity
         style={[
           styles.container,
-          size === 'sm' && styles.containerSM,
+          styles[containerClass],
           styles.loadingButton,
           styles.disabled,
           fullWidth && styles.fullWidth,
@@ -105,7 +114,7 @@ export default function Button({
       <TouchableOpacity
         style={[
           styles.container,
-          size === 'sm' && styles.containerSM,
+          styles[containerClass],
           mouseEntered && styles.hover,
           disabled && styles.disabled,
           fullWidth && styles.fullWidth,
@@ -117,11 +126,7 @@ export default function Button({
         activeOpacity={0.8}
       >
         {preTextComponent}
-        {titleComponent ? (
-          <>{titleComponent}</>
-        ) : (
-          <Typography type={size === 'sm' ? 'small-button' : 'button'}>{title}</Typography>
-        )}
+        {titleComponent ? <>{titleComponent}</> : <Typography type={textType}>{title}</Typography>}
         {postTextComponent}
       </TouchableOpacity>
     </button>
@@ -140,8 +145,14 @@ const useStyles = createStyles(theme => ({
     borderRadius: 2,
     flexDirection: 'row',
   },
-  containerSM: {
+  'container-sm': {
     height: 34,
+  },
+  'container-md': {
+    height: 40,
+  },
+  'container-lg': {
+    height: 66,
   },
   disabled: {
     opacity: 0.6,
@@ -155,14 +166,6 @@ const useStyles = createStyles(theme => ({
   rounded: {
     borderRadius: 100,
   },
-  text: {
-    color: '#fff',
-    fontWeight: '700',
-    fontSize: 24,
-  },
-  textSM: {
-    fontSize: 13,
-  },
   loadingButton: {
     minWidth: 100,
   },
@@ -174,6 +177,6 @@ const useStyles = createStyles(theme => ({
   },
   'color-unfilled': {
     backgroundColor: theme.colors.background,
-    border: `2px solid ${theme.colors.onSurface}`,
+    border: `1px solid ${theme.colors.onSurface}`,
   },
 }));
